@@ -68,6 +68,10 @@ The training script preprocesses the data, trains the model, and saves the model
 
 ```text
 student-depression-prediction/
+├── api-deployment-screenshots/
+│   ├── health-check.png
+│   ├── prediction-test-one.png
+│   └── prediction-test-two.png
 ├── data/
 │   └── Student_Depression_Dataset.csv
 ├── models/
@@ -149,13 +153,23 @@ docker run -d \
   student-depression-prediction
 ```
 
-The API is available at `http://localhost:9696`.
+**Open the FastAPI documentation.**
 
-To stop and remove the container:
+Open a web browser and visit `http://localhost:9696/docs`.
+
+The Swagger UI page displays the available API endpoints and allows the reviewer to test predictions.
+
+**Verify that the API is running.**
+
+Run the following command in the terminal.
 
 ```bash
-docker stop student-depression-api
-docker rm student-depression-api
+curl http://localhost:9696/health
+```
+Expected response:
+
+```json
+{"status":"ok"}
 ```
 
 ## API Usage Example
@@ -191,6 +205,13 @@ Example response:
 ```
 
 The probability represents the model's predicted probability of the `Yes` class. Actual predictions depend on the submitted input.
+
+**To stop and remove the container after testing, run:**
+
+```bash
+docker stop student-depression-api
+docker rm student-depression-api
+```
 
 ## Limitations and Next Steps
 
